@@ -1,16 +1,14 @@
-file1 = open('input.txt', 'r')
-Lines = file1.readlines()
+input = open('input.txt', 'r')
+Lines = input.read().splitlines()
 
 rules, chars, passwords = [[], [], []]
-
 valid_passwords = 0
-count = 0
 
 for line in Lines:
     line_list = line.split(" ")
     rules.append([int(x) for x in line_list[0].split("-")])
     chars.append(line_list[1].replace(":", ""))
-    passwords.append(line_list[2].replace("\n", ""))
+    passwords.append(line_list[2])
 
 for i in range(len(passwords)):
     char_count = passwords[i].count(chars[i])
