@@ -1,19 +1,35 @@
 import re
 
 
+def read_file(file_name):
+    # read file and split into  list of dictionaries of arguments
+    lines = open(file_name, 'r')
+    lines = lines.read().split("\n\n")
+    all_passports = []
+    for line in lines:
+        attributes = line.replace("\n", " ").split(" ")
+        all_passports.append(
+            {k: v for k, v in [a.split(":") for a in attributes if a]})
+    return all_passports
+
+
 def range_check(field, min_field, max_field):
+    # check if field value within range
     return min_field <= int(field) <= max_field
 
 
 def eye_check(field):
+    # check if eye colour in list of valid values
     return field in ['amb', 'blu', 'brn', 'gry', 'grn', 'hzl', 'oth']
 
 
 def pattern_check(field, regex):
+    # check if field matches regex required
     return bool(regex.match(field))
 
 
-def height_check(field):  
+def height_check(field):
+    # check if correct regex and numeric value within range
     format_pass = pattern_check(field, re.compile('[0-9]+(cm|in)'))
     range_pass = False
 
@@ -25,18 +41,8 @@ def height_check(field):
     return range_pass and format_pass
 
 
-def read_passports(passport_file):
-    input = open(passport_file, 'r')
-    lines = input.read().split("\n\n")
-    all_passports = []
-    for line in lines:
-        attributes = line.replace("\n", " ").split(" ")
-        all_passports.append(
-            {k: v for k, v in [a.split(":") for a in attributes if a]})
-    return all_passports
-
-
 def check_present(passports, key_list):
+    # check if all required keys exist in passport attributes
     present_passports = []
     for d in passports:
         if all([k in d.keys() for k in key_list]):
@@ -45,6 +51,7 @@ def check_present(passports, key_list):
 
 
 def check_valid(passports, func_dict):
+    # check if all entries pass format requirements
     valid_passports = []
     for d in passports:
         key_check = []
@@ -71,7 +78,7 @@ def main():
                  }
 
     # read input file
-    all_passports = read_passports('input.txt')
+    all_passports = read_file('input.txt')
     # check if all required keys exist
     present_passports = check_present(all_passports, func_dict.keys())
     print("Part 1 Answer: ",  len(present_passports))

@@ -1,11 +1,14 @@
-input = open('input.txt', 'r')
-lines = input.read().splitlines()
+def read_file(file_name):
+    # read input file and split each into lines,
+    input = open(file_name, 'r')
+    lines = input.read().splitlines()
+    return lines
 
 
-def count_trees(step_right, step_down):
-    row = 0
-    col = 0
-    trees = 0
+def count_trees(lines, step_right, step_down):
+    # count number of trees encountered
+    # when following steps until bottom of grid
+    row, col, trees = 0, 0, 0
 
     while row < len(lines) - step_down:
         col += step_right
@@ -19,11 +22,17 @@ def count_trees(step_right, step_down):
     return trees
 
 
-print("Part 1 Answer: ", count_trees(3, 1))
+def main():
+    lines = read_file('input.txt')
+    print("Part 1 answer: ", count_trees(lines, 3, 1))
 
-part_two_inputs = [[1, 1], [3, 1], [5, 1], [7, 1], [1, 2]]
-res = 1
-for args in part_two_inputs:
-    res = res * count_trees(*args)
+    part_two_inputs = [[1, 1], [3, 1], [5, 1], [7, 1], [1, 2]]
+    res = 1
+    # count number of trees for various inputs and multiply together
+    for args in part_two_inputs:
+        res = res * count_trees(lines, *args)
+    print("Part 2 answer: ", res)
 
-print("Part 1 Answer: ", res)
+
+if __name__ == "__main__":
+    main()
