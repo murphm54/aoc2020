@@ -17,20 +17,26 @@ def parse_description(description):
                 for de in description.split(',')]}
 
 
-def find_bag(rules, bag):
-    # find valid paths to bag provided 
-    valid_bags = []
-    for r in rules.keys():
-        rule_keys = [[r]]
-        last_keys = [rules[r]]
+def find_bag(rules, curr_bag, search_bag):
+    # recursively seach for a given bag
+    if len(rules[curr_bag].keys()) == 0:
+        return False
+    else:
         bag_found = False
-        while not bag_found and max([len(k) for k in last_keys]) > 0:
-            rule_keys, last_keys = get_keys(rules, rule_keys)
-            for path in rule_keys:
-                if path[0] != bag and bag in path and not bag_found:
-                    bag_found = True
-                    valid_bags.append(path)
-    return valid_bags
+        bag_found = search_bag in rules[curr_bag].keys()
+        if not bag_found:
+            for bag in rules[curr_bag].keys():
+                bag_found = bag_found or find_bag(rules, bag, search_bag)
+
+        return bag_found
+
+
+def search_all_bags(rules, search_bag):
+    # search for a given bag in all paths
+    all_bags = []
+    for r in rules.keys():
+        all_bags.append(find_bag(rules, r, search_bag))
+    return sum(all_bags)
 
 
 def calc_bag(rules, curr_bag):
@@ -45,24 +51,9 @@ def calc_bag(rules, curr_bag):
         return counter
 
 
-def get_keys(rules, rule_keys):
-    # get sub keys for given dictionary
-    new_rule_keys = []
-    last_keys = []
-    for k in rule_keys:
-        sub_keys = rules[k[-1]].keys()
-        if len(sub_keys) == 0:
-            last_keys.append('')
-        for j in sub_keys:
-            new_rule_keys.append(k + [j])
-            last_keys.append(j)
-    return new_rule_keys, last_keys
-
-
 def main():
     rules = read_file('input.txt')
-    valid_paths = find_bag(rules, 'shiny gold')
-    print("Part 1 Answer: ", len(valid_paths))
+    print("Part 1 Answer: ", search_all_bags(rules, 'shiny gold'))
     print("Part 2 Answer: ", calc_bag(rules, rules['shiny gold']))
 
 
