@@ -1,5 +1,5 @@
 def read_file(file_name):
-    #r ead file, split into lines and remove empty values
+    # read file, split into lines and remove empty values
     input = open(file_name, 'r')
     lines = input.read().split("\n\n")
     entries = [[r for r in line.split("\n") if r] for line in lines]
