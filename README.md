@@ -18,7 +18,7 @@ As a day-to-day kdb developer, I've decided to try advent of code this year with
 | 06   |  [Custom Customs](https://adventofcode.com/2020/day/6)            |  ★★  |
 | 07   |  [Handy Haversacks](https://adventofcode.com/2020/day/7)          |  ★★  |
 | 08   |  [Handheld Halting](https://adventofcode.com/2020/day/8)          |  ★★  | 
-| 09   |  [](https://adventofcode.com/2020/day/9)                          |  ☆☆  |
+| 09   |  [Encoding Error](https://adventofcode.com/2020/day/9)            |  ★★  |
 | 10   |  [](https://adventofcode.com/2020/day/10)        |  ☆☆    |
 | 11   |  [](https://adventofcode.com/2020/day/11)         |  ☆☆    | 
 | 12   |  [](https://adventofcode.com/2020/day/12)         |  ☆☆    |
