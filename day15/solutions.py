@@ -22,15 +22,15 @@ def memory_game(starting_list, max_number):
         ans_step_values = all_steps_dict.get(ans, [])
         step_num += 1
         ans_step_values.append(step_num)
-        all_steps_dict.update({ans: ans_step_values})
+        all_steps_dict.update({ans: ans_step_values[-2:]})
     
     return all_steps[-1]
 
 
 def main():
     print("Part 1 Answer: ", memory_game([1, 2, 16, 19, 18, 0], 2020))
-    #print("Part 2 Answer: ", docking_initialisation(all_steps, 2))
-
+    # TO DO - check for speed improvements 
+    print("Part 2 Answer: ", memory_game([1, 2, 16, 19, 18, 0], 30000000))
 
 if __name__ == "__main__":
     main()
