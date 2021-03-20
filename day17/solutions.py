@@ -189,9 +189,8 @@ def get_active_count(state):
     return total_active
 
 def main():
-    initial_state = read_file('test.txt')
+    initial_state = read_file('input.txt')
     print("Part 1 Answer: ", part_one(initial_state))
-    
     print("Part 2 Answer: ", part_two([initial_state]))
 
 
