@@ -87,9 +87,9 @@ def calc_by_brackets(calc_string, precedence_function):
     while len(find_char_in_string(calc_string, '(')):
         opening_brackets = find_char_in_string(calc_string, '(')
 
-        for bracket_ind, bracket in enumerate(opening_brackets):
-            next_closing_bracket = [ind for ind in find_char_in_string(calc_string, ')') if ind > o][0]
-            next_opening_brackets = [ind for ind in find_char_in_string(calc_string, '(') if ind > o]
+        for bracket in opening_brackets:
+            next_closing_bracket = [ind for ind in find_char_in_string(calc_string, ')') if ind > bracket][0]
+            next_opening_brackets = [ind for ind in find_char_in_string(calc_string, '(') if ind > bracket]
 
             # set to end of string if no next opening bracket
             if len(next_opening_brackets):
